@@ -109,6 +109,17 @@ int Print_all(SeqList *L)
     printf("-------------------------------\n");
 }
 
+//顺序表的逆置
+int List_Reserve(SeqList *L)
+{
+    int i,temp;
+    for(i=1; i<=L->length/2;i++)
+    {
+        temp = L->elem[i];
+        L->elem[i] = L->elem[L->length+1-i];
+        L->elem[L->length+1-i] = temp;
+    }
+}
 
 int main(void)
 {
@@ -122,14 +133,20 @@ int main(void)
         if(!Insert_SeqList(&List,i,i*i))
             printf("Insert fail\n");
     }
+    
+    Print_all(&List);
+    
+    List_Reserve(&List);
 
+    Print_all(&List);
+    /*
     //循环输出每一个元素
     printf("\n-----------------------------\n");
     for(i=1;i<=List.length;i++){
         Print_in_SeqList(&List , i);
     }
     printf("\n-----------------------------\n");
-    
+
     //删除下标为5的数
     printf("删除下标为5的数\n");
     Delete_SeqList(&List,5); 
@@ -141,7 +158,7 @@ int main(void)
     printf("The index of '9' is %d\n",Location_SeqList(&List , 9));
     
     printf("\n-----------------------------\n");
-
+    */
     return 0;
 }
 
