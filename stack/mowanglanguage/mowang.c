@@ -61,6 +61,38 @@ int  find_rule(char ch,char s[20]){
 
 }
 
+
+void find_end_rule(char s1[20],char s2[20]){
+    int i,j=0;
+    char s3[20];
+    for(i=0;i<strlen(s1);i++){
+        if(s1[i] >= 'A' && s1[i] <= 'Z' && find_rule(s1[i],s3)){
+            int k = 0;
+            for(k=0;k<strlen(s3);k++){
+                s2[j]=s3[k];
+                j++;
+            }
+        }else{
+            s2[j] = s1[i];
+            j++;
+        }
+    }
+    s2[strlen(s2)] = '\0';
+    //printf("-------%s-------\n",s2);
+    char k[20];
+    
+    for(i=0;i<strlen(s2);i++)
+    {
+        if(s2[i] >= 'A' && s2[i] <= 'Z' && find_rule(s2[i],k))
+        {
+            find_end_rule(s2,s1);
+            //printf("%s\n",s1);
+            strcpy(s2,s1);
+            break;
+        }
+    }
+    
+}
 //查找最终语言有无解释
 int  find_endlanguage(char ch,char s[20]){
     FILE *fp;
@@ -90,12 +122,13 @@ int  find_endlanguage(char ch,char s[20]){
 //压栈
 void pushstack(char s[], char origin[], int *top)
 {
-    char k[20];
+    char k[20],tmp[20];
     int m ,i, j,t;
     t = strlen(origin);
     for(j = 0; j < t; j ++){
         //去文件中找要替换的字符，如果需要替换，就替换
-        if(find_rule(origin[t - 1 - j],k)){
+        if(find_rule(origin[t - 1 - j],tmp)){
+            find_end_rule(tmp,k);
             m = strlen(k);
             for(i = 0; i < m; i ++){
                 if(*top > MAX - 1){
@@ -263,7 +296,7 @@ int add_rule(){
     tmp.s[strlen(tmp.s)-1] = '\0';
     int i,flag = 1;
     for(i=0;i<strlen(tmp.s);i++){
-        if(tmp.s[i] >= 'a' &&  tmp.s[i] <= 'z')  ;
+        if(tmp.s[i] >= 'a' &&  tmp.s[i] <= 'z'||tmp.s[i] >= 'A'&&tmp.s[i] <= 'Z')  ;
         else{ 
             flag = 0;
             break;
@@ -344,7 +377,7 @@ int update_rule(){
     tmp.s[strlen(tmp.s)-1] = '\0';
     int i,flag = 1;
     for(i=0;i<strlen(tmp.s);i++){
-        if(tmp.s[i] >= 'a' &&  tmp.s[i] <= 'z')  ;
+        if(tmp.s[i] >= 'a' &&  tmp.s[i] <= 'z'||tmp.s[i] >= 'A'&&tmp.s[i] <= 'Z')  ;
         else{ 
             flag = 0;
             break;
@@ -459,4 +492,3 @@ int main()
     printf("\n\n\t\t\tBye , Bye !\n");
     return 0;   
 }
-
