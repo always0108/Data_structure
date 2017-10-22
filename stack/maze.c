@@ -34,6 +34,7 @@ void dfs(int x ,int y,int step)
         endstep = step;
         return ;
     }
+
     int i,xx,yy;
     for(i=0; i < 4; i++)
     {
