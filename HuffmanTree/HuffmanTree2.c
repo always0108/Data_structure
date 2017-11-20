@@ -1,8 +1,8 @@
 /*************************************************************************
-	> File Name: HuffmanTree.c
+	> File Name: HuffmanTree2.c
 	> Author:limeng 
 	> Mail: ldx19980108@gmail.com
-	> Created Time: 2017年11月13日 星期一 14时42分20秒
+	> Created Time: 2017年11月20日 星期一 15时53分58秒
  ************************************************************************/
 
 #include<stdio.h>
@@ -37,7 +37,6 @@ void Select(HuffmanTree ht,int j,int *s1,int *s2)
             *s2 = i;
         }
     }
-    //printf("%d--%d\n",*s1,*s2);
 }
 
 void Print_huffmanTree(HuffmanTree ht , int n)
@@ -107,57 +106,80 @@ void CrtHuffmanCode1(HuffmanTree ht,huffmanCode hc,int n)
     }
 }
 
-int find_code(huffmanCode hc,int n,char *dest,char *result)
+int find_code(huffmanCode hc,int n,char *dest,int *result)
 {
     int i ;
     for(i=1;i<=n;i++){
         if(strcmp(dest,hc[i])==0){
-            *result = i - 1 + 'A';
+            *result = i;
             return 1;
         }
     }
     return 0;
 }
 
+
 int main(void)
 {
     HuffmanTree ht;
     huffmanCode hc;
     int n,i;
-    int w[31];
-    //scanf("%d",&n);
-    n = 6;
-    for(i=1;i<=n;i++)
-        scanf("%d",&w[i]);
+    int w[100];
+    int chlist[100];
     
+    int cal[128] = {0};
     char str[10001];
-    scanf("%s",str);
-    
     char code[10001];
-    scanf("%s",code);
+    char tmp;
+    while((tmp=getchar())!='#')
+    {
+        str[i] = tmp;
+        i++;
+    }
+    str[i] = '\0';
+
+    getchar();
+    gets(code);
+
+    for(i=0;i<strlen(str);i++)
+        cal[str[i]]++;
     
-    CrtHuffmanTree(ht,w,n);
-    hc = malloc(sizeof(char)*(n+1)*(n+1));
-    CrtHuffmanCode1(ht,hc,n);
-    char ch = 'A';
-   for(i=1;i<=n;i++){
-        printf("%c:%s\n",ch,hc[i]);
-        ch++;
+    int j = 1;
+    for(i=32;i<=122;i++){
+        if(cal[i]>0){
+            w[j] = cal[i];
+            chlist[j] = i;
+            j++;
+        }
     }
 
-    //编码
-    for(i=0;i<strlen(str);i++)
-        printf("%s",hc[str[i]-'A'+1]);
-    printf("\n");
+    n=j-1; 
+    CrtHuffmanTree(ht,w,n);
     
+    hc = malloc(sizeof(char)*(n+1)*(n+1));
+    CrtHuffmanCode1(ht,hc,n);
+ 
+    //编码
+    long long codelength = 0;
+    for(i=0;i<strlen(str);i++){
+        for(int x=1;x<=n;x++){
+            if(str[i]== chlist[x]){
+                printf("%s",hc[x]);
+                codelength +=strlen(hc[x]); 
+                break;
+            }
+        }
+    }
+    printf("\n");
+
     //译码 
     char temp[100];
-    char result;
+    int result;
     int k = 0;
     for(i=0;i<strlen(code);i++){
         temp[k] = code[i];
         if(find_code(hc,n,temp,&result)){
-            putchar(result);
+            putchar(chlist[result]);
             k = 0;
             memset(&temp,0,sizeof(temp));
         }
@@ -166,11 +188,8 @@ int main(void)
         }
     }
     printf("\n");
-    
+
+    printf("%0.2f\n",(codelength*1.0)/strlen(str));
     return 0;
 }
-
-
-
-
 
