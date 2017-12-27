@@ -213,6 +213,9 @@ int main(void)
 	scanf("%d",&start.x);
 	scanf("%d",&start.y);
 	setweight();
+    //0号元素利用了，输入要进行相应的处理
+    start.x--;
+    start.y--;
 	setmap();
 	HorsePath(start);
 	OutputPath();
