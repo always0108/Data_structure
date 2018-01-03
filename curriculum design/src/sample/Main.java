@@ -17,12 +17,30 @@ import java.util.Stack;
 
 
 public class Main extends Application {
-
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Scanner input = new Scanner(System.in);
         ConnectDatebase connect = new ConnectDatebase();
         Graph graph = new Graph(connect);
         graph.Create();
+
+        /*Time time = new Time();
+        Timetable route = new Timetable();
+        route.start = "北京";
+        route.end = "哈尔滨";
+        route.distance = 1000;
+        route.vehicle = "火车";
+        route.vehicle_number = "k24";
+        route.price = 200;
+        route.depart_time = time.DateToTimestamp("2018-01-04 08:00:00");
+        route.arrive_time = time.DateToTimestamp("2018-01-04 16:00:00");
+        route.time_consuming = 4;
+        //connect.Add_Route(route);*/
+
+        /*City city = new City();
+        city.name = "哈尔滨";
+        city.brief = "东北区域中心城市";
+        connect.Add_City(city);*/
         connect.close();
 
         /*Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -97,7 +115,7 @@ class ConnectDatebase{
     public boolean Add_Route(Timetable route) throws SQLException{
         try{
             stmt = conn.prepareStatement(
-               "INSERT INTO Timetable (start,end,distance,vehicle,vehicle_number,depart_time,arrive_time,time_consuming,price,)" +
+               "INSERT INTO Timetable(start,end,distance,vehicle,vehicle_number,depart_time,arrive_time,time_consuming,price)" +
                        "VALUES (?,?,?,?,?,?,?,?,?)");
             stmt.setString(1,route.start);
             stmt.setString(2,route.end);
@@ -249,7 +267,9 @@ class Graph {
             System.out.print(k+" ");
             Vertexlist[k].toString();
         }
-        Dijkstra(Vertexlist,"西安","北京");
+        //Dijkstra(Vertexlist,"西安","北京");
+        System.out.print("最少中转次数： ");
+        System.out.println(BFS(Vertexlist,"西安","哈尔滨"));
         return Vertexlist;
     }
 
@@ -330,6 +350,50 @@ class Graph {
             System.out.println(Vertexlist[i].city.name+"  price:  "+weight[i]);
         }
     }
+
+    //最少中转次数
+    public int BFS(VertexNode[] Vertexlist,String start,String end){
+
+        int arraymax = connect.citynum+1;
+        //获取起点终点的位置
+        int startindex = Locate(start, Vertexlist);
+        int endindex = Locate(end, Vertexlist);
+
+        Queue<node> queue = new LinkedList<>();
+        boolean[] visit = new boolean[arraymax];
+        for(int i=1;i<=connect.citynum;i++){ visit[i] = false; }
+
+        node curnode = new node();
+        curnode.count = 0;
+        curnode.index = startindex;
+
+        visit[startindex] = true;
+        queue.offer(curnode);
+        while(!queue.isEmpty()){
+            curnode = queue.poll();
+            for(int i=0;i<Vertexlist[curnode.index].list.size();i++){
+                int j = Vertexlist[curnode.index].list.get(i).adjvex;
+                if(!visit[j]){
+                    visit[j] = true;
+                    //已经找到该点
+                    if(j == endindex){
+                        return curnode.count;//能够直达就不用中转
+                    }
+                    node nextnode = new node();
+                    nextnode.index = j;
+                    nextnode.count = curnode.count+1;
+                    queue.offer(nextnode);
+                }
+            }
+        }
+        //从start无法到达end
+        return -1;
+    }
+}
+
+class node{
+    int index;
+    int count;
 }
 
 class Time{
