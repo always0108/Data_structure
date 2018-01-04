@@ -21,8 +21,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Scanner input = new Scanner(System.in);
         ConnectDatebase connect = new ConnectDatebase();
-        Graph graph = new Graph(connect);
-        graph.Create();
+        //Graph graph = new Graph(connect);
+        //graph.Create();
 
         /*Time time = new Time();
         Timetable route = new Timetable();
@@ -34,13 +34,13 @@ public class Main extends Application {
         route.price = 200;
         route.depart_time = time.DateToTimestamp("2018-01-04 08:00:00");
         route.arrive_time = time.DateToTimestamp("2018-01-04 16:00:00");
-        route.time_consuming = 4;
         //connect.Add_Route(route);*/
 
-        /*City city = new City();
-        city.name = "哈尔滨";
-        city.brief = "东北区域中心城市";
-        connect.Add_City(city);*/
+        City city = new City();
+        city.name = input.next();
+        city.brief = input.next();
+        //connect.Add_City(city);
+        connect.Modify_City(city);
         connect.close();
 
         /*Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
@@ -112,10 +112,10 @@ class ConnectDatebase{
     }
 
     //添加线路
-    public boolean Add_Route(Timetable route) throws SQLException{
+    public boolean Add_Route(Timetable route){
         try{
             stmt = conn.prepareStatement(
-               "INSERT INTO Timetable(start,end,distance,vehicle,vehicle_number,depart_time,arrive_time,time_consuming,price)" +
+               "INSERT INTO Timetable(start,end,distance,vehicle,vehicle_number,depart_time,arrive_time,price)" +
                        "VALUES (?,?,?,?,?,?,?,?,?)");
             stmt.setString(1,route.start);
             stmt.setString(2,route.end);
@@ -124,8 +124,7 @@ class ConnectDatebase{
             stmt.setString(5,route.vehicle_number);
             stmt.setTimestamp(6,route.depart_time);
             stmt.setTimestamp(7,route.arrive_time);
-            stmt.setDouble(8,route.time_consuming);
-            stmt.setDouble(9,route.price);
+            stmt.setDouble(8,route.price);
             stmt.execute();
             return true;
         }catch (SQLException e){
@@ -133,6 +132,23 @@ class ConnectDatebase{
             return false;
         }
     }
+
+    //删除路线
+    public boolean Delete_Route(Timetable route) throws SQLException{
+        try{
+            stmt = conn.prepareStatement(
+                    "DELETE FROM Timetable where vehicle_number = ? and depart_time = ?");
+            stmt.setString(1,route.vehicle_number);
+            stmt.setTimestamp(2,route.depart_time);
+            stmt.execute();
+            return true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //修改路线
 
     //添加城市
     public boolean Add_City(City city) {
@@ -149,7 +165,34 @@ class ConnectDatebase{
         }
     }
 
+    //删除城市
+    public boolean Delete_City(City city){
+        try{
+            stmt = conn.prepareStatement(
+                    "DELETE FROM City WHERE name = ?");
+            stmt.setString(1,city.name);
+            stmt.execute();
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    //修改城市
+    public boolean Modify_City(City city){
+        try{
+            stmt = conn.prepareStatement(
+                    "UPDATE City SET brief = ? WHERE name = ?");
+            stmt.setString(1,city.brief);
+            stmt.setString(2,city.name);
+            stmt.execute();
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
 }
@@ -157,7 +200,7 @@ class ConnectDatebase{
 
 
 class User{
-    int id;              //长度
+                         //长度
     String name;         //20
     String password;     //20
     String type;         //10
@@ -168,7 +211,7 @@ class User{
 }
 
 class City{
-    int id;               //长度
+                          //长度
     String name;          //30
     String brief;         //255
 
@@ -176,7 +219,7 @@ class City{
 }
 
 class Timetable{
-    int id;               //长度
+                          //长度
     String start;         //30
     String end;           //30
     double distance;
@@ -184,7 +227,6 @@ class Timetable{
     String vehicle_number;//20
     Timestamp depart_time;
     Timestamp arrive_time;
-    double time_consuming;
     double price;
 
     Timetable(){}
