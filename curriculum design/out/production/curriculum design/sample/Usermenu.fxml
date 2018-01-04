@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Main">
+  <children>
+    <GridPane layoutX="-10.0" layoutY="14.0" prefHeight="400.0" prefWidth="800.0">
+      <children>
+        <Label text="全国交通咨询系统" textFill="#0066ff" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <font>
+            <Font size="36.0" />
+          </font>
+        </Label>
+        <HBox prefHeight="50.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+          <children>
+            <ComboBox id="start" fx:id="startcom" editable="false" prefHeight="30.0" prefWidth="100.0" promptText="出发地" visibleRowCount="10">
+              <HBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" fx:id="x1" />
+              </HBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="endcom" editable="false" prefHeight="30.0" prefWidth="100.0" promptText="到达地" HBox.margin="$x1">
+            </ComboBox>
+          </children>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <children>
+            <Group id="Group" HBox.margin="$x1">
+              <children>
+                <CheckBox id="price" fx:id="pricebox" layoutX="120.0" layoutY="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="最省钱">
+                  <font>
+                    <Font size="16.0" fx:id="x2" />
+                  </font>
+                </CheckBox>
+                <CheckBox id="time" fx:id="transitbox" font="$x2" layoutX="0.0" layoutY="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="中转最少" />
+                <CheckBox id="time" fx:id="timebox" font="$x2" layoutX="220.0" layoutY="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="最省时" />
+              </children>
+            </Group>
+            <Button id="find" fx:id="findbutton" alignment="CENTER" contentDisplay="CENTER" font="$x2" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="查询" textAlignment="CENTER">
+              <HBox.margin>
+                <Insets bottom="20.0" right="20.0" top="40.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+        <TextArea id="result" fx:id="resultarea" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+          </GridPane.margin>
+        </TextArea>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+          <children>
+            <Button fx:id="datebase" blendMode="SRC_OVER" contentDisplay="RIGHT" disable="false" font="$x2" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="数据库管理" textAlignment="RIGHT" textFill="#ff3d00" underline="false" visible="true" wrapText="false">
+              <HBox.margin>
+                <Insets bottom="30.0" left="300.0" right="20.0" top="20.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+          <children>
+            <Label alignment="CENTER_RIGHT" font="$x2" prefHeight="30.0" prefWidth="200.0" text="查询结果：" textAlignment="LEFT">
+              <HBox.margin>
+                <Insets bottom="20.0" left="60.0" right="20.0" top="20.0" />
+              </HBox.margin>
+            </Label>
+          </children>
+        </HBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="258.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.0" minWidth="10.0" prefWidth="532.0" />
+      </columnConstraints>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <rowConstraints>
+        <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="163.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</AnchorPane>
