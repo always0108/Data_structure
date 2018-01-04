@@ -31,43 +31,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-
         current = primaryStage;
-
-        //Scanner input = new Scanner(System.in);
-        ConnectDatebase connect = new ConnectDatebase();
-        //Usermenu usermenu = new Usermenu(connect);
-        //usermenu.start();
-
-        Managemenu managemenu = new Managemenu(connect);
-        managemenu.openmanagemenu();
-
         primaryStage.setTitle("NTCS");
         notice.setTitle("消息提醒");
+
+
+        //连接数据库
+        ConnectDatebase connect = new ConnectDatebase();
+        Managemenu managemenu = new Managemenu(connect);
+        managemenu.openusermenu();
+
         primaryStage.show();
-
-
-
-
-        /*Time time = new Time();
-        Timetable route = new Timetable();
-        route.start = "北京";
-        route.end = "哈尔滨";
-        route.distance = 1000;
-        route.vehicle = "火车";
-        route.vehicle_number = "k24";
-        route.price = 200;
-        route.depart_time = time.DateToTimestamp("2018-01-04 08:00:00");
-        route.arrive_time = time.DateToTimestamp("2018-01-04 16:00:00");
-        //connect.Add_Route(route);*/
-
-        /*City city = new City();
-        city.name = input.next();
-        city.brief = input.next();
-        //connect.Add_City(city);
-        connect.Modify_City(city);
-        connect.close();*/
+        //Usermenu usermenu = new Usermenu(connect);
+        //usermenu.start();
 
 
     }
@@ -77,34 +53,37 @@ public class Main extends Application {
     }
 }
 
-class Usermenu{
+class Managemenu{
 
     ConnectDatebase connect;
-
     int type;//0中转次数最少，1最省时，2最省钱
-    TextArea resultdisplay = new TextArea();
-    Button controldatebase = new Button("数据库管理");
 
-    public Usermenu(ConnectDatebase connect)
-    {
-        this.connect =connect;
-    }
+    public Managemenu(ConnectDatebase connect) { this.connect =connect; }
 
-    public Usermenu() { }
+    public Managemenu() { }
 
+    //用户查询路径界面
+    public void openusermenu() throws SQLException{
+        Button controldatebase = new Button("数据库管理");
+        HBox hBox = new HBox(5);
+        hBox.setPadding(new Insets(0,0,0,20));
+        hBox.setAlignment(Pos.CENTER_RIGHT);
+        hBox.getChildren().add(controldatebase);
 
-
-    public void start() throws SQLException{
-
+        TextArea resultdisplay = new TextArea();
+        VBox vBox = new VBox(5);
+        Label tip = new Label("搜索结果：");
+        vBox.getChildren().addAll(tip,resultdisplay);
 
         ComboBox<String> startcmo = new ComboBox<>();
         ComboBox<String> endcmo = new ComboBox<>();
-        BorderPane pane = new BorderPane();
+        VBox usermenu = new VBox(10);
         RadioButton transitbutton = new RadioButton("中转最少");
         RadioButton timebutton = new RadioButton("最省时");
         RadioButton pricebutton = new RadioButton("最省钱");
         Button find = new Button("查找");
         Label title = new Label("全国交通咨询系统");
+        title.setFont(new Font("Times New Roman",24));
         ToggleGroup group = new ToggleGroup();
         HBox paneforradioButtons = new HBox(20);
         //创建一个按钮组
@@ -120,13 +99,14 @@ class Usermenu{
             startcmo.getItems().add(result.getString("name"));
             endcmo.getItems().add(result.getString("name"));
         }
-        paneforradioButtons.setPadding(new Insets(40,20,20,20));
+        //paneforradioButtons.setPadding(new Insets(20,20,20,20));
         paneforradioButtons.getChildren().addAll(transitbutton,timebutton,pricebutton,startcmo,endcmo,find);
-        pane.setTop(paneforradioButtons);
-        pane.setLeft(getresult());
-        pane.setBottom(getcontrol());
 
+        usermenu.setPadding(new Insets(20,20,20,20));
+        usermenu.setAlignment(Pos.CENTER);
+        usermenu.getChildren().addAll(title,paneforradioButtons,vBox,hBox);
 
+        Main.current.setScene(new Scene(usermenu,800,400));
         find.setOnAction(event -> {
             if(transitbutton.isSelected())
                 type = 0;
@@ -146,36 +126,11 @@ class Usermenu{
             }
 
         });
+
+        controldatebase.setOnAction(e->openmanagemenu());
     }
 
-    private VBox getresult(){
-        VBox vBox = new VBox();
-        vBox.setPadding(new Insets(20,20,20,20));
-        Label tip = new Label("搜索结果：");
-        vBox.getChildren().addAll(tip,resultdisplay);
-        return vBox;
-    }
-
-
-    private HBox getcontrol(){
-        HBox hBox = new HBox();
-        hBox.setPadding(new Insets(20,20,20,20));
-        hBox.getChildren().add(controldatebase);
-        return  hBox;
-    }
-}
-class Managemenu{
-
-    ConnectDatebase connect;
-
-    public Managemenu(ConnectDatebase connect)
-    {
-        this.connect =connect;
-    }
-
-    public Managemenu() { }
-
-
+    //管理菜单
     public void openmanagemenu(){
         GridPane managemenu = new GridPane();
         Button citylist = new Button("查询城市信息");
@@ -186,6 +141,7 @@ class Managemenu{
         Button timetableadd = new Button("添加车次");
         Button timetabledelete = new Button("删除车次");
         Button timetablemodify = new Button("修改车次");
+        Button ret = new Button("返回");
         citylist.setPrefSize(100,30);
         cityadd.setPrefSize(100,30);
         citydelete.setPrefSize(100,30);
@@ -194,13 +150,17 @@ class Managemenu{
         timetableadd.setPrefSize(100,30);
         timetabledelete.setPrefSize(100,30);
         timetablemodify.setPrefSize(100,30);
+        ret.setPrefSize(100,30);
         managemenu.setAlignment(Pos.CENTER);
-        managemenu.setHgap(20);
-        managemenu.setVgap(20);
+        managemenu.setHgap(10);
+        managemenu.setVgap(10);
         managemenu.addColumn(0,citylist,cityadd,citydelete,citymodify,
-                timetablelist,timetableadd,timetabledelete,timetablemodify);
+                timetablelist,timetableadd,timetabledelete,timetablemodify,ret);
         Main.current.setScene(new Scene(managemenu,800,400));
-
+        //城市的增删改查
+        cityadd.setOnAction(e->cityadd());
+        citydelete.setOnAction(e->citydelete());
+        citymodify.setOnAction(e->citymodify());
         citylist.setOnAction(e->{
             try{
                 cityfind();
@@ -208,9 +168,25 @@ class Managemenu{
                 ex.printStackTrace();
             }
         });
-        cityadd.setOnAction(e->cityadd());
-        citydelete.setOnAction(e->citydelete());
-        citymodify.setOnAction(e->citymodify());
+        //时刻表的增删改查
+        timetableadd.setOnAction(e->routeadd());
+        timetabledelete.setOnAction(e->routedelete());
+        timetablelist.setOnAction(e->{
+            try{
+                routelist();
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+        });
+
+        //返回用户界面
+        ret.setOnAction(e->{
+            try{
+                openusermenu();
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void cityfind() throws SQLException {
@@ -346,32 +322,172 @@ class Managemenu{
         });
     }
 
+    //------
+    //分页显示时刻表
+    public void routelist() throws SQLException{
+        StringBuilder tempresult = new StringBuilder();
+        ResultSet result = connect.List_Route();
+        while(result.next())
+        {
+            tempresult.append(String.format("出发地： %-30s\n到达地： %-30s\n距离：  %-10.2f千米\n列车类型：%-20s\n车次：  %-20s\n票价：  %-10.2f\n出发时间："
+                    ,result.getString("start"),result.getString("end"),
+                    result.getDouble("distance"),result.getString("vehicle"),
+                    result.getString("vehicle_number"),result.getDouble("price"))
+                    +result.getTimestamp("depart_time")+"\n到达时间："+result.getTimestamp("arrive_time")+"pre\nnext");
+        }
+        String  temp = tempresult.toString();
+        String[] textcontent = temp.split("pre\\nnext");
+
+        Pagination pagination;
+        pagination = new Pagination(textcontent.length, 0);
+        pagination.setPageFactory((Integer pageIndex) -> {
+            if (pageIndex >= textcontent.length) {
+                return null;
+            } else {
+                return createPage(pageIndex,textcontent);
+            }
+        });
+        VBox routelistui = new VBox(20);
+        routelistui.setPadding(new Insets(20,20,20,20));
+        Label title = new Label("列车时刻表");
+        title.setFont(new Font("Times New Roman",24));
+        Button ret = new Button("返回");
+        routelistui.setAlignment(Pos.CENTER);
+        routelistui.getChildren().add(title);
+        routelistui.getChildren().add(pagination);
+        routelistui.getChildren().add(ret);
+        Main.current.setScene(new Scene(routelistui,800,400));
+
+        ret.setOnAction(e->openmanagemenu());
+    }
+    public int itemsPerPage() {
+        return 1;
+    }
+    public VBox createPage(int pageIndex,String[] textcontent) {
+        VBox box = new VBox(5);
+        int page = pageIndex * itemsPerPage();
+        for (int i = page; i < page + itemsPerPage(); i++) {
+            TextArea text = new TextArea();
+            text.setWrapText(true);
+            text.setText(textcontent[i]);
+            box.getChildren().add(text);
+        }
+        return box;
+    }
+    //------
     public void routeadd(){{
         GridPane routeaddui = new GridPane();
+        routeaddui.setHgap(10);
+        routeaddui.setVgap(10);
+        routeaddui.setAlignment(Pos.CENTER);
         Label start = new Label("出发地：");
         Label end = new Label("到达地：");
-        Label ditance = new Label("距离：");
+        Label distance = new Label("距离：");
         Label vehicle = new Label("列车种类：");
         Label vehicle_number = new Label("车次号：");
         Label depart_time = new Label("发车时间：");
         Label arrive_time = new Label("到达时间：");
-        Label price = new Label("票价");
-        Button find = new Button("添加");
+        Label price = new Label("票价：");
+        Button add = new Button("添加");
         Button ret = new Button("返回");
         TextField startfield = new TextField();
         TextField endfield = new TextField();
         TextField distancefield = new TextField();
         ComboBox<String> vehiclecom = new ComboBox<>();
+        vehiclecom.setValue("列车类型");
         vehiclecom.getItems().addAll("高铁","动车","直达","特快");
         TextField vehicle_numberfield = new TextField();
+        TextField depart_timefield = new TextField();
+        TextField arrive_timefield = new TextField();
+        Label depart_timefieldtip = new Label("(yyyy-MM-dd HH:mm:ss)");
+        Label arrive_timefieldtip = new Label("(yyyy-MM-dd HH:mm:ss)");
         TextField pricefield = new TextField();
+        routeaddui.addRow(1,start,startfield);
+        routeaddui.addRow(2,end,endfield);
+        routeaddui.addRow(3,distance,distancefield);
+        routeaddui.addRow(4,vehicle,vehiclecom);
+        routeaddui.addRow(5,vehicle_number,vehicle_numberfield);
+        routeaddui.addRow(6,depart_time,depart_timefield,depart_timefieldtip);
+        routeaddui.addRow(7,arrive_time,arrive_timefield,arrive_timefieldtip);
+        routeaddui.addRow(8,price,pricefield);
+        routeaddui.add(add,1,9);
+        routeaddui.add(ret,2,9);
+        Main.current.setScene(new Scene(routeaddui,800,400));
 
+        ret.setOnAction(e->openmanagemenu());
 
+        add.setOnAction(e->{
+            try {
+                Timetable route = new Timetable();
+                City city = new City();
+                route.start = startfield.getText();
+                route.end = endfield.getText();
+                route.distance = Double.parseDouble(distancefield.getText());
+                route.vehicle = vehiclecom.getValue();
+                route.vehicle_number = vehicle_numberfield.getText();
+                route.depart_time = Time.DateToTimestamp(depart_timefield.getText());
+                route.arrive_time = Time.DateToTimestamp(arrive_timefield.getText());
+                route.price = Double.parseDouble(pricefield.getText());
 
-
+                city.name = route.start;
+                if(!connect.Cityisexist(city))
+                    new note("出发地不存在");
+                else{
+                    city.name = route.end;
+                    if(!connect.Cityisexist(city))
+                        new note("目的地不存在");
+                    else{
+                        if (connect.Routeisexist(route)){
+                            new note("该列车已被占用");
+                        }else{
+                            if(connect.Add_Route(route))
+                                new note("添加成功");
+                            else
+                                new note("添加失败");
+                        }
+                    }
+                }
+            }catch (ParseException ex){
+                new note("输入错误");
+            }
+        });
+    }
 
     }
 
+    public void routedelete() {
+        GridPane routedeleteui = new GridPane();
+        Label name = new Label("输入要删除的车次：");
+        TextField vehicle_number = new TextField();
+        Button delete = new Button("删除");
+        Button ret = new Button("返回");
+        routedeleteui.setAlignment(Pos.CENTER);
+        routedeleteui.setHgap(20);
+        routedeleteui.setVgap(20);
+        routedeleteui.add(name,0,0);
+        routedeleteui.add(vehicle_number,1,0);
+        routedeleteui.add(delete,1,1);
+        routedeleteui.add(ret,2,1);
+        Main.current.setScene(new Scene(routedeleteui,800,400));
+
+        ret.setOnAction(e->openmanagemenu());
+
+        delete.setOnAction(e->{
+            Timetable route = new Timetable();
+            route.vehicle_number = vehicle_number.getText();
+            if(!connect.Routeisexist(route)){
+                new note("要删除的车次不存在");
+            }else{
+                try{
+                if(connect.Delete_Route(route))
+                    new note("删除成功");
+                else
+                    new note("删除失败");
+                }catch (SQLException ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 }
 
@@ -398,6 +514,7 @@ class note{
 
     public note(){}
 }
+
 //MySQL
 class ConnectDatebase{
     String url = "jdbc:mysql://localhost:3306/NTCS?useUnicode=true&characterEncoding=utf-8&useSSL=false";
@@ -458,9 +575,10 @@ class ConnectDatebase{
     //添加线路
     public boolean Add_Route(Timetable route){
         try{
+            //后面的占位符一个也不能少，同样一个也不能多
             stmt = conn.prepareStatement(
-               "INSERT INTO Timetable(start,end,distance,vehicle,vehicle_number,depart_time,arrive_time,price)" +
-                       "VALUES (?,?,?,?,?,?,?,?,?)");
+               "INSERT INTO Timetable (start,end,distance,vehicle,vehicle_number,depart_time,arrive_time,price)" +
+                       "VALUES (?,?,?,?,?,?,?,?)");
             stmt.setString(1,route.start);
             stmt.setString(2,route.end);
             stmt.setDouble(3,route.distance);
@@ -472,6 +590,24 @@ class ConnectDatebase{
             stmt.execute();
             return true;
         }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //城市是否存在
+    public boolean Routeisexist(Timetable route) {
+        try{
+            stmt = conn.prepareStatement(
+                    "SELECT * FROM Timetable WHERE vehicle_number = ?");
+            stmt.setString(1,route.vehicle_number);
+            result = stmt.executeQuery();
+            if(result.next())
+                return true;
+            else
+                return false;
+        } catch (SQLException e){
+            e.printStackTrace();
             return false;
         }
     }
@@ -480,9 +616,8 @@ class ConnectDatebase{
     public boolean Delete_Route(Timetable route) throws SQLException{
         try{
             stmt = conn.prepareStatement(
-                    "DELETE FROM Timetable where vehicle_number = ? and depart_time = ?");
+                    "DELETE FROM Timetable where vehicle_number = ?");
             stmt.setString(1,route.vehicle_number);
-            stmt.setTimestamp(2,route.depart_time);
             stmt.execute();
             return true;
         }catch (SQLException e){
@@ -492,6 +627,12 @@ class ConnectDatebase{
     }
 
     //修改路线
+
+    //获取发车时间获取时刻表
+    public ResultSet List_Route() throws SQLException{
+        stmt = conn.prepareStatement("SELECT * FROM Timetable ORDER BY depart_time");
+        return stmt.executeQuery();
+    }
 
     //添加城市
     public boolean Add_City(City city) {
@@ -554,16 +695,13 @@ class ConnectDatebase{
         }
     }
 
-    //获取城市列表
+    //获取字母序获取城市列表
     public ResultSet List_City() throws SQLException{
-            stmt = conn.prepareStatement("SELECT * FROM City");
+            stmt = conn.prepareStatement("SELECT * FROM City ORDER BY name");
             return stmt.executeQuery();
     }
 
-
 }
-
-
 
 class User{
                          //长度
@@ -597,7 +735,6 @@ class Timetable{
 
     Timetable(){}
 };
-
 
 //顶点
 class VertexNode{
@@ -825,8 +962,9 @@ class Time{
     }
 
     //String转化为Timestamp
-    public Timestamp DateToTimestamp(String datestring) throws ParseException{
-        SimpleDateFormat df =new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public static Timestamp DateToTimestamp(String datestring) throws ParseException{
+        //HH是24时制，hh是12小时，会把12解析为00
+        SimpleDateFormat df =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date date = df.parse(datestring);
         return new Timestamp(date.getTime());
     }
