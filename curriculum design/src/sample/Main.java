@@ -14,8 +14,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import javax.swing.text.DefaultEditorKit;
 import java.sql.*;
 import java.sql.Driver;
 import java.text.ParseException;
@@ -107,27 +105,31 @@ class Managemenu{
         usermenu.getChildren().addAll(title,paneforradioButtons,vBox,hBox);
 
         Main.current.setScene(new Scene(usermenu,800,400));
+
         find.setOnAction(event -> {
-            if(transitbutton.isSelected())
-                type = 0;
-            else if(timebutton.isSelected())
-                type = 1;
-            else
-                type = 2;
             String strat = startcmo.getValue();
             String end = endcmo.getValue();
-
-            System.out.println(strat + " " + end +" " + type);
-            try {
-                Graph graph = new Graph(connect);
-                resultdisplay.setText(graph.Dijkstra(strat,end));
-            }catch (SQLException e){
-                e.printStackTrace();
+            Graph graph = new Graph(connect);
+            if(transitbutton.isSelected()){
+                try {
+                resultdisplay.setText(graph.BFS(strat,end,graph.Create()));
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }else if(timebutton.isSelected())
+                type = 1;
+            else {
+                try {
+                    resultdisplay.setText(graph.Dijkstra(strat,end,graph.Create()));
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
             }
-
         });
 
         controldatebase.setOnAction(e->openmanagemenu());
+
+
     }
 
     //管理菜单
@@ -765,20 +767,17 @@ class ArcNode{
 class Graph {
 
     ConnectDatebase connect;
-    VertexNode[] Vertexlist;
 
     Graph(){}
 
-    Graph(ConnectDatebase connect) throws java.sql.SQLException{
-        this.connect = connect;
-        Vertexlist = Create();
-    }
+    Graph(ConnectDatebase connect) { this.connect = connect; }
 
     public VertexNode[] Create() throws java.sql.SQLException {
 
         int n = connect.citynum;
         //建立顶点数组并初始化
         VertexNode[] Vertexlist = new VertexNode[n+1];
+
         for (int i = 1; i <= n; i++)
             Vertexlist[i] = new VertexNode();
 
@@ -788,7 +787,6 @@ class Graph {
         connect.result = connect.stmt.executeQuery();
         while(connect.result.next()){
             Vertexlist[i].city.name = connect.result.getString("name");
-            //System.out.println(Vertexlist[i].city.name);
             i++;
         }
 
@@ -801,22 +799,23 @@ class Graph {
             double weight = connect.result.getDouble("price");
             //System.out.println(start+"  "+end+"  "+weight);
             //查询对应的下标
-            int x = Locate(start);
-            int y = Locate(end);
+            int x = Locate(start,Vertexlist);
+            int y = Locate(end,Vertexlist);
             //添加边关系
             ArcNode node = new ArcNode();
             node.adjvex = y;
             node.weight = weight;
             Vertexlist[x].list.add(node);
         }
+        /*
         for (int k = 1; k <= n; k++){
             System.out.print(k+" ");
             Vertexlist[k].toString();
-        }
+        }*/
         return Vertexlist;
     }
 
-    public int Locate(String name) {
+    public int Locate(String name,VertexNode[] Vertexlist) {
         for (int i = 1; i <= connect.citynum; i++) {
             //查找到对应的位置
             if (name.equals(Vertexlist[i].city.name))
@@ -826,13 +825,14 @@ class Graph {
         return -1;
     }
 
-    public String Dijkstra(String start,String end){
+    //最省钱
+    public String Dijkstra(String start,String end,VertexNode[] Vertexlist){
 
         int arraymax = connect.citynum+1;
 
         //获取起点终点的位置
-        int startindex = Locate(start);
-        int endindex = Locate(end);
+        int startindex = Locate(start,Vertexlist);
+        int endindex = Locate(end,Vertexlist);
 
 
         //存取路径的数组
@@ -882,20 +882,10 @@ class Graph {
             }
         }
 
-        /*System.out.println("最省钱的方式：");
-        for(int i=1;i<=connect.citynum;i++){
-            if(i == startindex)
-                continue;
-            System.out.print(Vertexlist[startindex].city.name+"--->"+Vertexlist[i].city.name+":  ");
-            for(int j=1;path[i][j]!=0;j++) {
-                System.out.print(Vertexlist[path[i][j]].city.name + "  ");
-            }
-            System.out.println(Vertexlist[i].city.name+"  price:  "+weight[i]);
-        }*/
         StringBuilder result = new StringBuilder();
         result.append("最省钱的方式：\n");
-        for(int i=0;path[endindex][i]!=0;i++){
-            result.append(Vertexlist[path[endindex][i]].city.name + "  ");
+        for(int i=1;path[endindex][i]!=0;i++){
+            result.append(Vertexlist[path[endindex][i]].city.name + "--->");
         }
         result.append(Vertexlist[endindex].city.name+"  price:  "+weight[endindex]);
 
@@ -903,12 +893,14 @@ class Graph {
     }
 
     //最少中转次数
-    public int BFS(String start,String end){
+    public String BFS(String start,String end,VertexNode[] Vertexlist){
 
+        int count = 0;
+        StringBuilder result = new StringBuilder();
         int arraymax = connect.citynum+1;
         //获取起点终点的位置
-        int startindex = Locate(start);
-        int endindex = Locate(end);
+        int startindex = Locate(start,Vertexlist);
+        int endindex = Locate(end,Vertexlist);
 
         Queue<node> queue = new LinkedList<>();
         boolean[] visit = new boolean[arraymax];
@@ -928,25 +920,40 @@ class Graph {
                     visit[j] = true;
                     //已经找到该点
                     if(j == endindex){
-                        return curnode.count;//能够直达就不用中转
+                        count = curnode.count;//能够直达就不用中转
+                        curnode.queue.offer(Vertexlist[curnode.index].list.get(i));
+                        result.append("最少中转次数：\n");
+                        result.append(Vertexlist[startindex].city.name);
+                        while(!curnode.queue.isEmpty()){
+                            result.append("--->"+Vertexlist[curnode.queue.poll().adjvex].city.name);
+                        }
+                        result.append("\n中转"+count+" 次");
                     }
+
                     node nextnode = new node();
                     nextnode.index = j;
                     nextnode.count = curnode.count+1;
+                    while(!curnode.queue.isEmpty()){
+                        nextnode.queue.offer(curnode.queue.poll());
+                    }
+                    nextnode.queue.offer(Vertexlist[curnode.index].list.get(i));
                     queue.offer(nextnode);
+
+
                 }
             }
         }
-        //从start无法到达end
-        return -1;
+        return result.toString();
     }
 }
 
 class node{
     int index;
     int count;
+    Queue<ArcNode> queue = new LinkedList<>();
 }
 
+//关于时间的比较和转化
 class Time{
 
     //计算两个日期的时间差(单位为小时)
