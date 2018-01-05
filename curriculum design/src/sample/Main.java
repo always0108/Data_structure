@@ -3,6 +3,7 @@ package sample;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -76,7 +77,12 @@ class Menu{
         RadioButton timebutton = new RadioButton("最省时");
         RadioButton pricebutton = new RadioButton("最省钱");
         Button find = new Button("查找");
+        startcmo.setPrefSize(100,30);
+        endcmo.setPrefSize(100,30);
+        find.setPrefSize(80,30);
+        controldatebase.setPrefSize(100,30);
         Label title = new Label("全国交通咨询系统");
+        title.setTextFill(Color.BLUE);
         title.setFont(new Font("Times New Roman",30));
         ToggleGroup group = new ToggleGroup();
         HBox paneforradioButtons = new HBox(15);
@@ -88,27 +94,52 @@ class Menu{
         ResultSet result = connect.List_City();
         startcmo.setValue("出发地");
         endcmo.setValue("到达地");
-        while (result.next())
-        {
+        while (result.next()) {
             startcmo.getItems().add(result.getString("name"));
-            endcmo.getItems().add(result.getString("name"));
         }
-        //paneforradioButtons.setPadding(new Insets(20,20,20,20));
         paneforradioButtons.getChildren().addAll(transitbutton,timebutton,pricebutton,startcmo,endcmo,find);
-
         usermenu.setPadding(new Insets(20,20,20,20));
         usermenu.setAlignment(Pos.CENTER);
         usermenu.getChildren().addAll(title,paneforradioButtons,vBox,hBox);
 
         Main.current.setScene(new Scene(usermenu,800,400));
 
+        startcmo.setOnAction(e->{
+            try{
+                endcmo.setValue("到达地");
+                StringBuilder str = new StringBuilder();
+                ResultSet endresult = connect.List_City();
+                while (endresult.next())
+                {
+                    String temp = endresult.getString("name");
+                    if(startcmo.getValue().equals(temp))
+                        continue;
+                    str.append(temp+"\n");
+                }
+                String[] strlist = str.toString().split("\\n");
+                ObservableList<String> end = FXCollections.observableArrayList(strlist);
+                endcmo.setItems(end);
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+        });
+
         find.setOnAction(event -> {
-            String strat = startcmo.getValue();
-            String end = endcmo.getValue();
             Graph graph = new Graph(connect);
+            String start = startcmo.getValue();
+            String end = endcmo.getValue();
+            if(!transitbutton.isSelected() && !timebutton.isSelected() && !pricebutton.isSelected()){
+                new note("请选择查询方式");
+                return;
+            }
+            if (end.equals("到达地"))
+            {
+                new note("请选择出发地和到达地");
+                return;
+            }
             if(transitbutton.isSelected()){
                 try {
-                resultdisplay.setText(graph.BFS(strat,end,graph.Create()));
+                resultdisplay.setText(graph.BFS(start,end,graph.Create()));
                 }catch (SQLException e){
                     e.printStackTrace();
                 }catch (ParseException e ){
@@ -117,7 +148,7 @@ class Menu{
             }else if(timebutton.isSelected()){
                 try {
                     try{
-                        resultdisplay.setText(graph.Dijkstratime(strat,end,graph.Create()));
+                        resultdisplay.setText(graph.Dijkstratime(start,end,graph.Create()));
                     }catch(ParseException ex){
                         ex.printStackTrace();
                     }
@@ -128,7 +159,7 @@ class Menu{
             else {
                 try {
                     try{
-                        resultdisplay.setText(graph.Dijkstra(strat,end,graph.Create()));
+                        resultdisplay.setText(graph.Dijkstra(start,end,graph.Create()));
                     }catch(ParseException ex){
                         ex.printStackTrace();
                     }
@@ -193,7 +224,7 @@ class Menu{
             }
         });
 
-        //返回用户界面
+        //返回搜索界面
         ret.setOnAction(e->{
             try{
                 openusermenu();
@@ -870,11 +901,9 @@ class Graph {
                 //获取时间差
                 if(0 == Time.timedifference(nodelist[current].time,Time.DateToTimestamp("0000-00-00 00:00:00")))
                 {
-                    temp = 0;
-
+                    temp = Time.timedifference(Vertexlist[current].list.get(i).depart_time,Vertexlist[current].list.get(i).arrive_time);
                 }else{
                     temp = Time.timedifference(nodelist[current].time,Vertexlist[current].list.get(i).arrive_time);
-
                 }
                 //从当前结点找能到达的最近的没被访问过的结点
                 if(!nodelist[j].visit && min > temp) {
@@ -902,15 +931,13 @@ class Graph {
             ArcNode temp = nodelist[endindex].path.get(i);
             result.append("--"+temp.vehicle+":"+temp.vehicle_number +"-->"+Vertexlist[temp.adjvex].city.name);
         }
-        result.append("\ntime:  "+nodelist[endindex].weight+"小时");
+        result.append("\n所需时间:  "+nodelist[endindex].weight+"小时");
 
         if(nodelist[endindex].weight != Double.MAX_VALUE)
             return result.toString();
         else
             return "无法到达";
     }
-
-
 
     //最省钱
     public String Dijkstra(String start,String end,VertexNode[] Vertexlist) throws ParseException{
@@ -970,7 +997,7 @@ class Graph {
             ArcNode temp = nodelist[endindex].path.get(i);
             result.append("--"+temp.vehicle+":"+temp.vehicle_number +"-->"+Vertexlist[temp.adjvex].city.name);
         }
-        result.append("\nprice:  "+nodelist[endindex].weight);
+        result.append("\n票价:  "+nodelist[endindex].weight);
         if(nodelist[endindex].weight != Double.MAX_VALUE)
             return result.toString();
         else

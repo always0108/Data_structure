@@ -89,29 +89,31 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="171" column="59" lean-forward="false" selection-start-line="171" selection-start-column="59" selection-end-line="171" selection-end-column="59" />
+            <state relative-caret-position="227">
+              <caret line="108" column="39" lean-forward="false" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Main#0" expanded="false" />
                 <element signature="method#start#0;class#Main#0" expanded="false" />
-                <element signature="e#1179#1180#0" expanded="true" />
-                <element signature="e#1207#1208#0" expanded="true" />
-                <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-                <element signature="e#6348#6498#0" expanded="false" />
+                <element signature="e#1225#1226#0" expanded="true" />
+                <element signature="e#1253#1254#0" expanded="true" />
+                <element signature="e#4164#5754#0" expanded="false" />
+                <element signature="e#7527#7677#0" expanded="false" />
+                <element signature="e#7722#7875#0" expanded="false" />
                 <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
                 <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-                <element signature="e#8610#9007#0" expanded="false" />
+                <element signature="e#9789#10186#0" expanded="false" />
                 <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-                <element signature="e#9672#10027#0" expanded="false" />
+                <element signature="e#10851#11206#0" expanded="false" />
                 <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-                <element signature="e#10853#11257#0" expanded="false" />
+                <element signature="e#12032#12436#0" expanded="false" />
                 <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-                <element signature="e#12203#12410#0" expanded="false" />
-                <element signature="e#12980#12981#0" expanded="true" />
-                <element signature="e#13004#13005#0" expanded="true" />
+                <element signature="e#13382#13589#0" expanded="false" />
+                <element signature="e#14159#14160#0" expanded="true" />
+                <element signature="e#14183#14184#0" expanded="true" />
+                <element signature="method#createPage#0;class#Menu#0" expanded="false" />
                 <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-                <element signature="e#15354#16821#0" expanded="false" />
+                <element signature="e#16533#18000#0" expanded="false" />
                 <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
                 <element signature="class#note#0" expanded="false" />
                 <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -130,10 +132,10 @@
                 <element signature="class#VertexNode#0" expanded="false" />
                 <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
                 <element signature="class#ArcNode#0" expanded="false" />
-                <element signature="class#Graph#0" expanded="false" />
                 <element signature="method#Create#0;class#Graph#0" expanded="false" />
                 <element signature="method#Locate#0;class#Graph#0" expanded="false" />
                 <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+                <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
                 <element signature="method#BFS#0;class#Graph#0" expanded="false" />
                 <element signature="class#dijnode#0" expanded="false" />
                 <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -141,19 +143,6 @@
                 <element signature="class#Time#0" expanded="false" />
                 <element signature="method#timedifference#0;class#Time#0" expanded="false" />
                 <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-                <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-                <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-                <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-                <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-                <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-                <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-                <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-                <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-                <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-                <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-                <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-                <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-                <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
               </folding>
             </state>
           </provider>
@@ -229,7 +218,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="26" />
     <option name="width" value="1612" />
     <option name="height" value="876" />
@@ -459,15 +448,15 @@
       <workItem from="1515075443843" duration="2931000" />
       <workItem from="1515080583427" duration="11272000" />
       <workItem from="1515115706815" duration="3421000" />
-      <workItem from="1515122872915" duration="9289000" />
+      <workItem from="1515122872915" duration="11769000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105928000" />
+    <option name="totallyTimeSpent" value="108408000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="26" width="1920" height="1054" extended-state="7" />
+    <frame x="0" y="26" width="1920" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -559,23 +548,25 @@
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -594,10 +585,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -605,19 +596,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
@@ -663,23 +641,25 @@
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -698,10 +678,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -709,19 +689,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
@@ -767,23 +734,25 @@
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -802,10 +771,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -813,19 +782,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
@@ -871,23 +827,25 @@
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -906,10 +864,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -917,19 +875,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
@@ -968,23 +913,25 @@
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -1003,10 +950,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -1014,19 +961,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
@@ -1048,23 +982,25 @@
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -1083,10 +1019,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -1094,19 +1030,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
@@ -1127,23 +1050,25 @@
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -1162,10 +1087,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -1173,19 +1098,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
@@ -1307,29 +1219,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="171" column="59" lean-forward="false" selection-start-line="171" selection-start-column="59" selection-end-line="171" selection-end-column="59" />
+        <state relative-caret-position="227">
+          <caret line="108" column="39" lean-forward="false" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Main#0" expanded="false" />
             <element signature="method#start#0;class#Main#0" expanded="false" />
-            <element signature="e#1179#1180#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="method#openusermenu#0;class#Menu#0" expanded="false" />
-            <element signature="e#6348#6498#0" expanded="false" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1253#1254#0" expanded="true" />
+            <element signature="e#4164#5754#0" expanded="false" />
+            <element signature="e#7527#7677#0" expanded="false" />
+            <element signature="e#7722#7875#0" expanded="false" />
             <element signature="method#cityfind#0;class#Menu#0" expanded="false" />
             <element signature="method#cityadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#8610#9007#0" expanded="false" />
+            <element signature="e#9789#10186#0" expanded="false" />
             <element signature="method#citydelete#0;class#Menu#0" expanded="false" />
-            <element signature="e#9672#10027#0" expanded="false" />
+            <element signature="e#10851#11206#0" expanded="false" />
             <element signature="method#citymodify#0;class#Menu#0" expanded="false" />
-            <element signature="e#10853#11257#0" expanded="false" />
+            <element signature="e#12032#12436#0" expanded="false" />
             <element signature="method#routelist#0;class#Menu#0" expanded="false" />
-            <element signature="e#12203#12410#0" expanded="false" />
-            <element signature="e#12980#12981#0" expanded="true" />
-            <element signature="e#13004#13005#0" expanded="true" />
+            <element signature="e#13382#13589#0" expanded="false" />
+            <element signature="e#14159#14160#0" expanded="true" />
+            <element signature="e#14183#14184#0" expanded="true" />
+            <element signature="method#createPage#0;class#Menu#0" expanded="false" />
             <element signature="method#routeadd#0;class#Menu#0" expanded="false" />
-            <element signature="e#15354#16821#0" expanded="false" />
+            <element signature="e#16533#18000#0" expanded="false" />
             <element signature="method#routedelete#0;class#Menu#0" expanded="false" />
             <element signature="class#note#0" expanded="false" />
             <element signature="class#ConnectDatebase#0" expanded="false" />
@@ -1348,10 +1262,10 @@
             <element signature="class#VertexNode#0" expanded="false" />
             <element signature="method#toString#0;class#VertexNode#0" expanded="false" />
             <element signature="class#ArcNode#0" expanded="false" />
-            <element signature="class#Graph#0" expanded="false" />
             <element signature="method#Create#0;class#Graph#0" expanded="false" />
             <element signature="method#Locate#0;class#Graph#0" expanded="false" />
             <element signature="method#Dijkstratime#0;class#Graph#0" expanded="false" />
+            <element signature="method#Dijkstra#0;class#Graph#0" expanded="false" />
             <element signature="method#BFS#0;class#Graph#0" expanded="false" />
             <element signature="class#dijnode#0" expanded="false" />
             <element signature="method#dijnode#0;class#dijnode#0" expanded="false" />
@@ -1359,19 +1273,6 @@
             <element signature="class#Time#0" expanded="false" />
             <element signature="method#timedifference#0;class#Time#0" expanded="false" />
             <element signature="method#timeisbefore#0;class#Time#0" expanded="false" />
-            <marker date="1515132429832" expanded="true" signature="19855:19891" ph="SELECT count... City" />
-            <marker date="1515132429832" expanded="true" signature="20058:20099" ph="SELECT count... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="20402:20549" ph="INSERT INTO Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="21229:21277" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="21748:21794" ph="DELETE FROM Timetable... " />
-            <marker date="1515132429832" expanded="true" signature="22135:22179" ph="SELECT * FRO... Timetable" />
-            <marker date="1515132429832" expanded="true" signature="22350:22392" ph="INSERT INTO City... " />
-            <marker date="1515132429832" expanded="true" signature="22775:22808" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="23241:23272" ph="DELETE FROM City... " />
-            <marker date="1515132429832" expanded="true" signature="23610:23650" ph="UPDATE City... " />
-            <marker date="1515132429832" expanded="true" signature="24014:24046" ph="SELECT * FRO... City" />
-            <marker date="1515132429832" expanded="true" signature="25607:25628" ph="SELECT name City" />
-            <marker date="1515132429832" expanded="true" signature="25894:25917" ph="SELECT * FRO... Timetable" />
           </folding>
         </state>
       </provider>
