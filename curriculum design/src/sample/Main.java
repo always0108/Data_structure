@@ -33,17 +33,12 @@ public class Main extends Application {
         primaryStage.setTitle("NTCS");
         notice.setTitle("消息提醒");
 
-
         //连接数据库
         ConnectDatebase connect = new ConnectDatebase();
-        Managemenu managemenu = new Managemenu(connect);
+        //设置开启界面
+        Menu managemenu = new Menu(connect);
         managemenu.openusermenu();
-
         primaryStage.show();
-        //Usermenu usermenu = new Usermenu(connect);
-        //usermenu.start();
-
-
     }
 
     public static void main(String[] args) {
@@ -51,25 +46,26 @@ public class Main extends Application {
     }
 }
 
-class Managemenu{
+//界面类
+class Menu{
 
     ConnectDatebase connect;
     int type;//0中转次数最少，1最省时，2最省钱
 
-    public Managemenu(ConnectDatebase connect) { this.connect =connect; }
+    public Menu(ConnectDatebase connect) { this.connect =connect; }
 
-    public Managemenu() { }
+    public Menu() { }
 
     //用户查询路径界面
     public void openusermenu() throws SQLException{
         Button controldatebase = new Button("数据库管理");
         HBox hBox = new HBox(5);
-        hBox.setPadding(new Insets(0,0,0,20));
+        hBox.setPadding(new Insets(0,0,0,0));
         hBox.setAlignment(Pos.CENTER_RIGHT);
         hBox.getChildren().add(controldatebase);
 
         TextArea resultdisplay = new TextArea();
-        VBox vBox = new VBox(5);
+        VBox vBox = new VBox(10);
         Label tip = new Label("搜索结果：");
         vBox.getChildren().addAll(tip,resultdisplay);
 
@@ -81,9 +77,9 @@ class Managemenu{
         RadioButton pricebutton = new RadioButton("最省钱");
         Button find = new Button("查找");
         Label title = new Label("全国交通咨询系统");
-        title.setFont(new Font("Times New Roman",24));
+        title.setFont(new Font("Times New Roman",30));
         ToggleGroup group = new ToggleGroup();
-        HBox paneforradioButtons = new HBox(20);
+        HBox paneforradioButtons = new HBox(15);
         //创建一个按钮组
         transitbutton.setToggleGroup(group);
         timebutton.setToggleGroup(group);
@@ -115,12 +111,28 @@ class Managemenu{
                 resultdisplay.setText(graph.BFS(strat,end,graph.Create()));
                 }catch (SQLException e){
                     e.printStackTrace();
+                }catch (ParseException e ){
+                    e.printStackTrace();
                 }
-            }else if(timebutton.isSelected())
-                type = 1;
+            }else if(timebutton.isSelected()){
+                try {
+                    try{
+                        resultdisplay.setText(graph.Dijkstratime(strat,end,graph.Create()));
+                    }catch(ParseException ex){
+                        ex.printStackTrace();
+                    }
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            }
             else {
                 try {
-                    resultdisplay.setText(graph.Dijkstra(strat,end,graph.Create()));
+                    try{
+                        resultdisplay.setText(graph.Dijkstra(strat,end,graph.Create()));
+                    }catch(ParseException ex){
+                        ex.printStackTrace();
+                    }
+
                 }catch (SQLException e){
                     e.printStackTrace();
                 }
@@ -142,7 +154,7 @@ class Managemenu{
         Button timetablelist = new Button("时刻表");
         Button timetableadd = new Button("添加车次");
         Button timetabledelete = new Button("删除车次");
-        Button timetablemodify = new Button("修改车次");
+        //Button timetablemodify = new Button("修改车次");
         Button ret = new Button("返回");
         citylist.setPrefSize(100,30);
         cityadd.setPrefSize(100,30);
@@ -151,13 +163,13 @@ class Managemenu{
         timetablelist.setPrefSize(100,30);
         timetableadd.setPrefSize(100,30);
         timetabledelete.setPrefSize(100,30);
-        timetablemodify.setPrefSize(100,30);
+        //timetablemodify.setPrefSize(100,30);
         ret.setPrefSize(100,30);
         managemenu.setAlignment(Pos.CENTER);
         managemenu.setHgap(10);
         managemenu.setVgap(10);
         managemenu.addColumn(0,citylist,cityadd,citydelete,citymodify,
-                timetablelist,timetableadd,timetabledelete,timetablemodify,ret);
+                timetablelist,timetableadd,timetabledelete,ret);
         Main.current.setScene(new Scene(managemenu,800,400));
         //城市的增删改查
         cityadd.setOnAction(e->cityadd());
@@ -493,6 +505,7 @@ class Managemenu{
     }
 }
 
+//消息提醒
 class note{
 
     public note(String content){
@@ -705,17 +718,7 @@ class ConnectDatebase{
 
 }
 
-class User{
-                         //长度
-    String name;         //20
-    String password;     //20
-    String type;         //10
-    String question;     //50
-    String answer;       //20
-
-    User(){}
-}
-
+//城市类
 class City{
                           //长度
     String name;          //30
@@ -724,6 +727,7 @@ class City{
     City(){}
 }
 
+//时刻表类
 class Timetable{
                           //长度
     String start;         //30
@@ -738,12 +742,13 @@ class Timetable{
     Timetable(){}
 };
 
-//顶点
+//顶点类
 class VertexNode{
     City city = new City();
     LinkedList<ArcNode> list = new LinkedList();
 
     VertexNode() {}
+
     @Override
     public String toString(){
         System.out.print(city.name);
@@ -755,15 +760,19 @@ class VertexNode{
     }
 }
 
-//边集
+//边类
 class ArcNode{
     int adjvex;
     double weight;
+    double distance;
+    String vehicle;
+    String vehicle_number;
     Timestamp depart_time;
     Timestamp arrive_time;
     ArcNode() {}
 }
 
+//图的操作
 class Graph {
 
     ConnectDatebase connect;
@@ -805,13 +814,18 @@ class Graph {
             ArcNode node = new ArcNode();
             node.adjvex = y;
             node.weight = weight;
+            node.depart_time = connect.result.getTimestamp("depart_time");
+            node.arrive_time = connect.result.getTimestamp("arrive_time");
+            node.distance = connect.result.getDouble("distance");
+            node.vehicle = connect.result.getString("vehicle");
+            node.vehicle_number = connect.result.getString("vehicle_number");
             Vertexlist[x].list.add(node);
         }
-        /*
+
         for (int k = 1; k <= n; k++){
             System.out.print(k+" ");
             Vertexlist[k].toString();
-        }*/
+        }
         return Vertexlist;
     }
 
@@ -825,57 +839,57 @@ class Graph {
         return -1;
     }
 
-    //最省钱
-    public String Dijkstra(String start,String end,VertexNode[] Vertexlist){
+    //最省时
+    public String Dijkstratime(String start,String end,VertexNode[] Vertexlist) throws ParseException{
 
         int arraymax = connect.citynum+1;
-
         //获取起点终点的位置
         int startindex = Locate(start,Vertexlist);
         int endindex = Locate(end,Vertexlist);
 
-
-        //存取路径的数组
-        int[][] path = new int[arraymax][arraymax];
-
-        //判断结点是否被访问过
-        boolean[] visit = new boolean[arraymax];
-        for(int i=1;i<=connect.citynum;i++){ visit[i] = false; }
-
-        //记录权值的大小
-        double[] weight = new double[arraymax];
-        for(int i=1;i<=connect.citynum;i++){ weight[i] = Double.MAX_VALUE; }
+        //初始化
+        dijnode[] nodelist = new dijnode[arraymax];
+        for(int i=1;i<=connect.citynum;i++){ nodelist[i] = new dijnode(); }
 
         Stack<Integer> stack = new Stack<>();
-        weight[startindex] = 0;
+        nodelist[startindex].weight = 0;
         stack.push(startindex);
+
         while(!stack.empty()){
             double min = Double.MAX_VALUE;
             int minindex = -1;
             int current = stack.pop();
-            visit[current] = true;
+            nodelist[current].visit = true;
+
             for(int i=0;i<Vertexlist[current].list.size();i++){
+                if(!Time.timeisbefore(nodelist[current].time,Vertexlist[current].list.get(i).depart_time))
+                    continue;
 
                 int j = Vertexlist[current].list.get(i).adjvex;
-                double temp =  Vertexlist[current].list.get(i).weight;
+                double temp ;
+                //获取时间差
+                if(0 == Time.timedifference(nodelist[current].time,Time.DateToTimestamp("0000-00-00 00:00:00")))
+                {
+                    temp = 0;
+
+                }else{
+                    temp = Time.timedifference(nodelist[current].time,Vertexlist[current].list.get(i).arrive_time);
+
+                }
                 //从当前结点找能到达的最近的没被访问过的结点
-                if(!visit[j] && min > temp) {
+                if(!nodelist[j].visit && min > temp) {
                     minindex = j;
                 }
-
                 //原来没有路径或者现在有更短的路径
-                if(!visit[j] && weight[j] > weight[current] + temp){
-                    weight[j] = weight[current] + temp;
-                    //路径的继承
-                    int t=1;
-                    while(path[current][t] != 0){
-                        path[j][t] = path[current][t];
-                        t++;
-                    }
-                    path[j][t] = current;
-                    path[j][t+1] = 0;
+                if(!nodelist[j].visit && nodelist[j].weight > nodelist[current].weight + temp)
+                {
+                    nodelist[j].weight = nodelist[current].weight + temp;
+                    nodelist[j].path.clear();
+                    nodelist[j].time = Vertexlist[current].list.get(i).arrive_time;
+                    for(int k = 0;k < nodelist[current].path.size();k++) {
+                        nodelist[j].path.add(nodelist[current].path.get(k)); }
+                    nodelist[j].path.add(Vertexlist[current].list.get(i));
                 }
-
                 if(minindex > -1){
                     stack.push(minindex);
                 }
@@ -883,18 +897,90 @@ class Graph {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("最省钱的方式：\n");
-        for(int i=1;path[endindex][i]!=0;i++){
-            result.append(Vertexlist[path[endindex][i]].city.name + "--->");
+        result.append("时间最短的方式：\n"+Vertexlist[startindex].city.name  );
+        for(int i=0;i<nodelist[endindex].path.size();i++){
+            ArcNode temp = nodelist[endindex].path.get(i);
+            result.append("--"+temp.vehicle+":"+temp.vehicle_number +"-->"+Vertexlist[temp.adjvex].city.name);
         }
-        result.append(Vertexlist[endindex].city.name+"  price:  "+weight[endindex]);
+        result.append("\ntime:  "+nodelist[endindex].weight+"小时");
 
-        return result.toString();
+        if(nodelist[endindex].weight != Double.MAX_VALUE)
+            return result.toString();
+        else
+            return "无法到达";
+    }
+
+
+
+    //最省钱
+    public String Dijkstra(String start,String end,VertexNode[] Vertexlist) throws ParseException{
+
+        int arraymax = connect.citynum+1;
+        //获取起点终点的位置
+        int startindex = Locate(start,Vertexlist);
+        int endindex = Locate(end,Vertexlist);
+
+        //初始化
+        dijnode[] nodelist = new dijnode[arraymax];
+        for(int i=1;i<=connect.citynum;i++){ nodelist[i] = new dijnode(); }
+
+        Stack<Integer> stack = new Stack<>();
+        nodelist[startindex].weight = 0;
+        stack.push(startindex);
+
+        while(!stack.empty()){
+            double min = Double.MAX_VALUE;
+            int minindex = -1;
+            int current = stack.pop();
+            nodelist[current].visit = true;
+
+            for(int i=0;i<Vertexlist[current].list.size();i++){
+                int j = Vertexlist[current].list.get(i).adjvex;
+                double temp =  Vertexlist[current].list.get(i).weight;
+
+                if(!Time.timeisbefore(nodelist[current].time,Vertexlist[current].list.get(i).depart_time))
+                    continue;
+                //从当前结点找能到达的最近的没被访问过的结点
+                if(!nodelist[j].visit && min > temp) {
+                    minindex = j;
+                }
+
+                //原来没有路径或者现在有更短的路径
+                if(!nodelist[j].visit && nodelist[j].weight > nodelist[current].weight + temp){
+                    nodelist[j].weight = nodelist[current].weight + temp;
+                    //路径的继承
+                    nodelist[j].path.clear();
+                    for(int t = 0;t < nodelist[current].path.size();t++) {
+                        nodelist[j].path.add(nodelist[current].path.get(t));
+                    }
+                    nodelist[j].path.add(Vertexlist[current].list.get(i));
+                    //时间更新为到达最后一站的时间
+                    nodelist[j].time = Vertexlist[current].list.get(i).arrive_time;
+                }
+                if(minindex > -1){
+                    stack.push(minindex);
+                }
+            }
+        }
+
+
+        StringBuilder result = new StringBuilder();
+        result.append("最省钱的方式：\n"+Vertexlist[startindex].city.name  );
+        for(int i=0;i<nodelist[endindex].path.size();i++){
+            ArcNode temp = nodelist[endindex].path.get(i);
+            result.append("--"+temp.vehicle+":"+temp.vehicle_number +"-->"+Vertexlist[temp.adjvex].city.name);
+        }
+        result.append("\nprice:  "+nodelist[endindex].weight);
+        if(nodelist[endindex].weight != Double.MAX_VALUE)
+            return result.toString();
+        else
+            return "无法到达";
     }
 
     //最少中转次数
-    public String BFS(String start,String end,VertexNode[] Vertexlist){
+    public String BFS(String start,String end,VertexNode[] Vertexlist) throws ParseException{
 
+        boolean flag = false;
         int count = 0;
         StringBuilder result = new StringBuilder();
         int arraymax = connect.citynum+1;
@@ -916,20 +1002,25 @@ class Graph {
             curnode = queue.poll();
             for(int i=0;i<Vertexlist[curnode.index].list.size();i++){
                 int j = Vertexlist[curnode.index].list.get(i).adjvex;
+                //时间不符合
+                if(!Time.timeisbefore(curnode.time,Vertexlist[curnode.index].list.get(i).depart_time))
+                    continue;
+
                 if(!visit[j]){
                     visit[j] = true;
                     //已经找到该点
                     if(j == endindex){
+                        flag = true;
                         count = curnode.count;//能够直达就不用中转
                         curnode.queue.offer(Vertexlist[curnode.index].list.get(i));
                         result.append("最少中转次数：\n");
                         result.append(Vertexlist[startindex].city.name);
                         while(!curnode.queue.isEmpty()){
-                            result.append("--->"+Vertexlist[curnode.queue.poll().adjvex].city.name);
+                            ArcNode temp = curnode.queue.poll();
+                            result.append("--"+temp.vehicle+":"+temp.vehicle_number+"-->"+Vertexlist[temp.adjvex].city.name);
                         }
                         result.append("\n中转"+count+" 次");
                     }
-
                     node nextnode = new node();
                     nextnode.index = j;
                     nextnode.count = curnode.count+1;
@@ -937,35 +1028,59 @@ class Graph {
                         nextnode.queue.offer(curnode.queue.poll());
                     }
                     nextnode.queue.offer(Vertexlist[curnode.index].list.get(i));
+                    nextnode.time = Vertexlist[curnode.index].list.get(i).arrive_time;
                     queue.offer(nextnode);
-
-
                 }
             }
         }
-        return result.toString();
+        if(flag)
+            return result.toString();
+        else
+            return "无法到达";
+    }
+
+}
+
+//Dijkstra所用的节点
+class dijnode{
+    double weight ;
+    boolean visit ;
+    LinkedList <ArcNode> path ;
+    Timestamp time ;
+
+    public dijnode() throws ParseException{
+        weight = Double.MAX_VALUE;
+        visit = false;
+        path = new LinkedList<ArcNode>();
+        time = Time.DateToTimestamp("0000-00-00 00:00:00");
     }
 }
 
+//最少中转次数的存储数据的节点
 class node{
     int index;
     int count;
     Queue<ArcNode> queue = new LinkedList<>();
+    Timestamp time;
+
+    public node() throws  ParseException{
+        time = Time.DateToTimestamp("0000-00-00 00:00:00");
+    }
 }
 
 //关于时间的比较和转化
 class Time{
 
     //计算两个日期的时间差(单位为小时)
-    public double timedifference(Timestamp start,Timestamp end){
+    public static double timedifference(Timestamp start,Timestamp end){
         return (end.getTime()-start.getTime())*1.0/(1000*60*60);
     }
 
     //比较两个时间的先后
-    public int timeisbefore(Timestamp a,Timestamp b){
+    public static boolean timeisbefore(Timestamp a,Timestamp b){
         if(a.before(b))
-            return 1;
-        return 0;
+            return true;
+        return false;
     }
 
     //String转化为Timestamp
