@@ -814,6 +814,8 @@ class Graph {
 
     public VertexNode[] Create() throws java.sql.SQLException {
 
+        connect.getnum();
+        //设最多1000个城市
         int n = connect.citynum;
         //建立顶点数组并初始化
         VertexNode[] Vertexlist = new VertexNode[n+1];
@@ -851,11 +853,6 @@ class Graph {
             node.vehicle = connect.result.getString("vehicle");
             node.vehicle_number = connect.result.getString("vehicle_number");
             Vertexlist[x].list.add(node);
-        }
-
-        for (int k = 1; k <= n; k++){
-            System.out.print(k+" ");
-            Vertexlist[k].toString();
         }
         return Vertexlist;
     }
@@ -1065,7 +1062,6 @@ class Graph {
         else
             return "无法到达";
     }
-
 }
 
 //Dijkstra所用的节点
@@ -1118,16 +1114,3 @@ class Time{
         return new Timestamp(date.getTime());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
